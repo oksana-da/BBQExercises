@@ -75,7 +75,7 @@ public class SmartFridge {
         wurstGesamtPreis = wurstMax * wurstPreis;
         kaeseGesamtPreis = kaeseMax * kaesePreis;
         brotGesamtPreis = brotMax * brotPreis;
-        gesamtKaufPreis = (wurstMax * wurstPreis) + (kaeseMax * kaesePreis) + (brotMax * brotPreis);
+        gesamtKaufPreis = wurstGesamtPreis + kaeseGesamtPreis + brotGesamtPreis;
 
         System.out.println("Dein Kassenbon:");
         System.out.println(String.format("%-9s %2d x %5.2f EUR", "Wurst", wurstMax, wurstPreis));
