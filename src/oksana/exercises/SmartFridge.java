@@ -10,7 +10,7 @@ public class SmartFridge {
         //Das sind die Preise (Zum Beispiel, die kommen aus dem Internet-Shop, wo der Kühlschrank Waren einkauft).
         double wurstPreis = 4.20;
         double kaesePreis = 2.30;
-        double brotPreis = 1;
+        double brotPreis = 1.0;
         double durchschnittPreis = (wurstPreis + kaesePreis + brotPreis) / 3;
 
         //Ich plane 1 Mal pro Woche einkaufen. Das ist die Liste für jede Woche und Preise.
@@ -36,7 +36,7 @@ public class SmartFridge {
         double gesamtKaufPreis;
         double geldFehlt;
 
-        boolean kuelschrankFunkzioniert = true;
+        boolean kuehlschrankFunktioniert = true;
         char auswahl;
 
         Scanner eingabe = new Scanner(System.in);
@@ -150,6 +150,6 @@ public class SmartFridge {
                 System.out.print("Gesamt");
                 System.out.println(String.format("%24.2f EUR", gesamtKaufPreis));
             }
-        } while (kuelschrankFunkzioniert == true);
+        } while (kuehlschrankFunktioniert == true);
     }
 }
