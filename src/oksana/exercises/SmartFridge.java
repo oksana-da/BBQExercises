@@ -11,25 +11,30 @@ public class SmartFridge {
         double wurstPreis = 4.20;
         double kaesePreis = 2.30;
         double brotPreis = 1.0;
-        double durchschnittPreis = (wurstPreis + kaesePreis + brotPreis) / 3;
+        double milchPreis = 1.1;
+        double durchschnittPreis = (wurstPreis + kaesePreis + brotPreis) / 4;
 
         //Ich plane 1 Mal pro Woche einkaufen. Das ist die Liste für jede Woche und Preise.
         int wurstMax;
         int kaeseMax;
         int brotMax;
+        int milchMax;
 
         int wurstKaufen;
         int kaeseKaufen;
         int brotKaufen;
+        int milchKaufen;
 
         double wurstGesamtPreis;
         double kaeseGesamtPreis;
         double brotGesamtPreis;
+        double milchGesamtPreis;
 
         //Produkte, die man aus dem Kühlschrank nimmt.
         int wurstGegessen;
         int kaeseGegessen;
         int brotGegessen;
+        int milchGegessen;
 
         //Mein Budget für eine Woche. Beim Online-Kauf gib es kein Rest.
         double budget;
@@ -46,8 +51,8 @@ public class SmartFridge {
         System.out.println("Du hast eine Basis-Option: Produkte werden jeder Woche gekauft werden.");
         System.out.println("\nMomentan ist der Kühlschrank leer. " +
                 "Erstell bitte eine wöchentliche Eikaufsliste für jede Woche.");
-        //Hier kann mann Produkte im Internet-Shop auswählen.
 
+        //Hier kann mann Produkte im Internet-Shop auswählen.
         do {
             System.out.print("Wie viel Wurst (4.20 EUR): ");
             wurstMax = eingabe.nextInt();
@@ -55,12 +60,13 @@ public class SmartFridge {
             kaeseMax = eingabe.nextInt();
             System.out.print("Wie viel Brot (1 EUR): ");
             brotMax = eingabe.nextInt();
+            System.out.print("Wie viel Milch (1 EUR): ");
+            milchMax = eingabe.nextInt();
 
+            budget = (wurstMax * wurstPreis) + (kaeseMax * kaesePreis) + (brotMax * brotPreis) + (milchMax * milchPreis);
 
-            budget = (wurstMax * wurstPreis) + (kaeseMax * kaesePreis) + (brotMax * brotPreis);
-
-            System.out.print("Gesamtpreis ist " + budget + "\nEs wird dein Budget für jede Woche. " +
-                    "Bist du einverstanden? (J/N): ");
+            System.out.println(String.format("Gesamtpreis ist " + "%.2f EUR.", budget));
+            System.out.print("\nEs wird dein Budget für jede Woche. Bist du einverstanden? (J/N): ");
             auswahl = eingabe.next().toUpperCase().charAt(0);
 
             if (auswahl != 'J') {
@@ -69,13 +75,14 @@ public class SmartFridge {
 
         } while (auswahl != 'J');
 
-        System.out.println("\nSuper! Dein wöchentliches Budget ist: " + budget + " EUR.");
-        System.out.println("\uD83C\uDF53 Ich habe Lebensmittel bestellt, und die Lieferung ist shon morgen!");
+        System.out.println(String.format("\nSuper! Dein wöchentliches Budget ist: " + "%.2f EUR.",  budget));
+        System.out.println("\n\uD83C\uDF53 Ich habe Lebensmittel bestellt, und die Lieferung ist shon morgen!");
 
         wurstGesamtPreis = wurstMax * wurstPreis;
         kaeseGesamtPreis = kaeseMax * kaesePreis;
         brotGesamtPreis = brotMax * brotPreis;
-        gesamtKaufPreis = wurstGesamtPreis + kaeseGesamtPreis + brotGesamtPreis;
+        milchGesamtPreis = milchMax * milchPreis;
+        gesamtKaufPreis = wurstGesamtPreis + kaeseGesamtPreis + brotGesamtPreis + milchGesamtPreis;
 
         System.out.println("Dein Kassenbon:");
         System.out.println(String.format("%-9s %2d x %5.2f EUR", "Wurst", wurstMax, wurstPreis));
@@ -84,10 +91,11 @@ public class SmartFridge {
         System.out.println(String.format("%30.2f EUR", kaeseGesamtPreis));
         System.out.println(String.format("%-9s %2d x %5.2f EUR", "Brot", brotMax, brotPreis));
         System.out.println(String.format("%30.2f EUR", brotGesamtPreis));
+        System.out.println(String.format("%-9s %2d x %5.2f EUR", "Milch", milchMax, milchPreis));
+        System.out.println(String.format("%30.2f EUR", milchGesamtPreis));
         System.out.println("__________________________________");
         System.out.print("Gesamt");
         System.out.println(String.format("%24.2f EUR", gesamtKaufPreis));
-
 
         do {
             //Man nimmt Produkte aus dem Kühlschrank.
@@ -98,20 +106,26 @@ public class SmartFridge {
             kaeseGegessen = eingabe.nextInt();
             System.out.print("Brot: (0-" + brotMax + "): ");
             brotGegessen = eingabe.nextInt();
+            System.out.print("Milch: (0-" + milchMax + "): ");
+            milchGegessen = eingabe.nextInt();
 
             wurstKaufen = wurstMax - (wurstMax - wurstGegessen);
             kaeseKaufen = kaeseMax - (kaeseMax - kaeseGegessen);
             brotKaufen = brotMax - (brotMax - brotGegessen);
+            milchKaufen = milchMax - (milchMax - milchGegessen);
 
             double wurstPreisNeu = 4.20;
             double kaesePreisNeu = 2.30;
             double brotPreisNeu = 1;
-            double durchschnittPreisNeu = (wurstPreisNeu + kaesePreisNeu + brotPreisNeu) / 3;
+            double milchPreisNeu = 1.1;
+            double durchschnittPreisNeu = (wurstPreisNeu + kaesePreisNeu + brotPreisNeu) / 4;
 
             wurstGesamtPreis = wurstKaufen * wurstPreisNeu;
             kaeseGesamtPreis = kaeseKaufen * kaesePreisNeu;
             brotGesamtPreis = brotKaufen * brotPreisNeu;
-            gesamtKaufPreis = wurstGesamtPreis + kaeseGesamtPreis + brotGesamtPreis;
+            milchGesamtPreis = milchKaufen * milchPreisNeu;
+
+            gesamtKaufPreis = wurstGesamtPreis + kaeseGesamtPreis + brotGesamtPreis + milchGesamtPreis;
 
             if (gesamtKaufPreis > budget) {
                 geldFehlt = gesamtKaufPreis - budget;
@@ -130,6 +144,8 @@ public class SmartFridge {
                 System.out.println(String.format("%30.2f EUR", kaeseGesamtPreis));
                 System.out.println(String.format("%-9s %2d x %5.2f EUR", "Brot", brotKaufen, brotPreisNeu));
                 System.out.println(String.format("%30.2f EUR", brotGesamtPreis));
+                System.out.println(String.format("%-9s %2d x %5.2f EUR", "Milch", milchKaufen, milchPreisNeu));
+                System.out.println(String.format("%30.2f EUR", milchGesamtPreis));
                 System.out.println("__________________________________");
                 System.out.print("Gesamt");
                 System.out.println(String.format("%24.2f EUR", gesamtKaufPreis));
@@ -146,6 +162,8 @@ public class SmartFridge {
                 System.out.println(String.format("%30.2f EUR", kaeseGesamtPreis));
                 System.out.println(String.format("%-9s %2d x %5.2f EUR", "Brot", brotKaufen, brotPreisNeu));
                 System.out.println(String.format("%30.2f EUR", brotGesamtPreis));
+                System.out.println(String.format("%-9s %2d x %5.2f EUR", "Milch", milchKaufen, milchPreisNeu));
+                System.out.println(String.format("%30.2f EUR", milchGesamtPreis));
                 System.out.println("__________________________________");
                 System.out.print("Gesamt");
                 System.out.println(String.format("%24.2f EUR", gesamtKaufPreis));
